@@ -24,6 +24,7 @@ class Packet:
 
 # abastece os caminhoes
 # recebe um array de caminhoes e de pacotes
+# retorna os caminhoes abastecidos
 def fillTrucks(trucks, packets):  
     remainPackets = packets
     for truck in trucks:
@@ -40,47 +41,25 @@ def fillTruck(truck, packets):
 
     # inicia a matriz de memoria
     mem = [[-1 for x in range(capacity+1)] for x in range(n+1)]        
-    
     for i in range(0, n+1):
-
         for w in range(0, capacity+1):
-
             last = i - 1
 
             if i == 0 or w == 0:
-
                 mem[i][w] = 0
 
             elif packets[last].weight <= w:
-
                 a = packets[last].value + mem[last][w - packets[last].weight]
                 b = mem[last][w]
                 mem[i][w] = max(a, b)
             
             else:
-
                 mem[i][w] = mem[last][w]
 
     # printMemoryMatrix(mem, capacity, n)
     remainPackets = findPackets(truck, packets, mem)
 
     return remainPackets
-
-# imprime a matriz de memoria
-def printMemoryMatrix(mem, capacity, n):
-    for y in range(capacity + 1):
-        r = '['
-        for x in range(n + 1):
-            item = mem[x][y]
-
-            r += ' '
-            if item < 10:
-                r += ' '
-            if item < 100:
-                r += ' '
-
-            r += str(item) + ', '
-        print(r + ']')
 
 # encontra os pacotes e os coloca no caminhao
 # recebe o objeto caminhao, um array de pacotes e a matriz de memoria
@@ -104,6 +83,21 @@ def findPackets(truck, packets, mem):
 
     return remainPackets
 
+# imprime a matriz de memoria para debugar a aplicação
+def printMemoryMatrix(mem, capacity, n):
+    for y in range(capacity + 1):
+        r = '['
+        for x in range(n + 1):
+            item = mem[x][y]
+
+            r += ' '
+            if item < 10:
+                r += ' '
+            if item < 100:
+                r += ' '
+
+            r += str(item) + ', '
+        print(r + ']')
 
 
 def main():
