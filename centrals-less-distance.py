@@ -54,7 +54,7 @@ def deepSearch(graph, startPosition):
 # monta a rota para sair da origem e chegar no destino
 # recebe a origem, o destino, um array de distancias e um array com a posicao da vertice anterior
 # devolve um array com o menor percurso para o destino a partir da origem
-def mountRoute(source, destination, items):
+def getShortestRoute(source, destination, items):
     
     route = []
     route.append(destination)
@@ -92,7 +92,7 @@ def main():
     # realiza a busca em largura com base no elemento cs
     items = deepSearch(graph, csPosition)
     # monta a rota para chegar em ct a partir de cs
-    route = mountRoute(csPosition, ctPosition, items)
+    route = getShortestRoute(csPosition, ctPosition, items)
 
     print(route)
 
